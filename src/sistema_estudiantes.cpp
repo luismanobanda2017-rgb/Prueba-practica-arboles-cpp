@@ -461,3 +461,248 @@ public:
         cout << "  Total reprobados: " << contador << "\n";
     }
 
+    // ============================================================
+    //  UTILIDADES DE VISUALIZACIÓN
+    // ============================================================
+
+    // Imprime los datos de un estudiante en formato tabla
+    void mostrarEstudiante(const Estudiante& e) {
+        cout << "  ┌─────────────────────────────────────────────┐\n";
+        cout << "  │ Cédula   : " << left << setw(34) << e.cedula    << "│\n";
+        cout << "  │ Apellidos: " << left << setw(34) << e.apellidos << "│\n";
+        cout << "  │ Nombres  : " << left << setw(34) << e.nombres   << "│\n";
+        cout << "  │ Carrera  : " << left << setw(34) << e.carrera   << "│\n";
+        cout << "  │ Nivel    : " << left << setw(34) << e.nivel     << "│\n";
+        cout << fixed << setprecision(2);
+        string estado = (e.notaFinal >= NOTA_APROBACION) ? "APROBADO ✔" : "REPROBADO ✗";
+        cout << "  │ Nota     : " << left << setw(8)  << e.notaFinal
+             << " " << left << setw(25) << estado << "│\n";
+        cout << "  └─────────────────────────────────────────────┘\n";
+    }
+
+    void separador() {
+        cout << "  ─────────────────────────────────────────────────\n";
+    }
+
+    void sinDatos() {
+        cout << "  [!] El árbol está vacío. No hay estudiantes registrados.\n";
+    }
+};
+
+// ============================================================
+//  FUNCIONES AUXILIARES DE ENTRADA
+// ============================================================
+
+// Limpia el buffer de entrada para evitar problemas con cin
+void limpiarBuffer() {
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+
+// Valida que la cédula tenga exactamente 10 dígitos numéricos
+bool validarCedula(const string& cedula) {
+    if (cedula.length() != 10) return false;
+    for (char c : cedula)
+        if (!isdigit(c)) return false;
+    return true;
+}
+
+// Valida que la nota esté en el rango [0, 10]
+bool validarNota(double nota) {
+    return (nota >= 0.0 && nota <= 10.0);
+}
+
+// Captura un estudiante desde la consola con validaciones
+Estudiante capturarEstudiante() {
+    Estudiante e;
+
+    do {
+        cout << "  Cédula (10 dígitos): ";
+        cin >> e.cedula;
+        if (!validarCedula(e.cedula))
+            cout << "  [!] Cédula inválida. Debe tener exactamente 10 dígitos.\n";
+    } while (!validarCedula(e.cedula));
+
+    limpiarBuffer();
+
+    cout << "  Apellidos          : ";
+    getline(cin, e.apellidos);
+
+    cout << "  Nombres            : ";
+    getline(cin, e.nombres);
+
+    cout << "  Carrera            : ";
+    getline(cin, e.carrera);
+
+    do {
+        cout << "  Nivel (1-10)       : ";
+        cin >> e.nivel;
+    } while (e.nivel < 1 || e.nivel > 10);
+
+    do {
+        cout << "  Nota final (0-10)  : ";
+        cin >> e.notaFinal;
+        if (!validarNota(e.notaFinal))
+            cout << "  [!] Nota inválida. Debe estar entre 0.0 y 10.0\n";
+    } while (!validarNota(e.notaFinal));
+
+    return e;
+}
+
+// ============================================================
+//  FUNCIÓN: cargarDatosDePrueba
+//  Inserta 8 estudiantes de ejemplo para facilitar las pruebas.
+// ============================================================
+void cargarDatosDePrueba(ArbolBST& arbol) {
+    Estudiante datos[] = {
+        {"1804567890", "Tobar Ramirez",    "Carlos Andres",  8.5, "Sistemas",     3},
+        {"1802345678", "Moreta Guevara",   "Ana Lucia",      6.5, "Industrial",   2},
+        {"1806789012", "Salazar Vega",     "Luis Fernando",  9.2, "Civil",        4},
+        {"1801234567", "Alvarez Torres",   "Maria Jose",     5.8, "Sistemas",     1},
+        {"1805678901", "Perez Castillo",   "Juan Pablo",     7.0, "Electronica",  3},
+        {"1803456789", "Flores Naranjo",   "Sofia Isabella", 4.3, "Industrial",   2},
+        {"1807890123", "Zambrano Lara",    "Diego Alejandro",8.9, "Civil",        5},
+        {"1808901234", "Herrera Montoya",  "Valeria Nicole", 7.5, "Sistemas",     4}
+    };
+
+    int n = sizeof(datos) / sizeof(datos[0]);
+    for (int i = 0; i < n; i++)
+        arbol.insertarEstudiante(datos[i]);
+
+    cout << "  ✔ Se cargaron " << n << " estudiantes de prueba correctamente.\n";
+}
+
+// ============================================================
+//  FUNCIÓN: mostrarMenu
+//  Despliega el menú principal del sistema.
+// ============================================================
+void mostrarMenu() {
+    cout << "\n";
+    cout << "  ╔══════════════════════════════════════════════════╗\n";
+    cout << "  ║   UNIVERSIDAD TÉCNICA DE AMBATO                  ║\n";
+    cout << "  ║   Sistema de Gestión Académica - Árbol BST       ║\n";
+    cout << "  ╠══════════════════════════════════════════════════╣\n";
+    cout << "  ║  1.  Insertar estudiante                         ║\n";
+    cout << "  ║  2.  Buscar estudiante por cédula                ║\n";
+    cout << "  ║  3.  Eliminar estudiante                         ║\n";
+    cout << "  ╠══════════════════════════════════════════════════╣\n";
+    cout << "  ║  4.  Recorrido Inorden                           ║\n";
+    cout << "  ║  5.  Recorrido Preorden                          ║\n";
+    cout << "  ║  6.  Recorrido Postorden                         ║\n";
+    cout << "  ║  7.  Recorrido por niveles (BFS)                 ║\n";
+    cout << "  ╠══════════════════════════════════════════════════╣\n";
+    cout << "  ║  8.  Contar estudiantes                          ║\n";
+    cout << "  ║  9.  Calcular altura del árbol                   ║\n";
+    cout << "  ║  10. Mostrar estudiante con mayor nota           ║\n";
+    cout << "  ║  11. Mostrar estudiante con menor nota           ║\n";
+    cout << "  ╠══════════════════════════════════════════════════╣\n";
+    cout << "  ║  12. Mostrar estudiantes aprobados               ║\n";
+    cout << "  ║  13. Mostrar estudiantes reprobados              ║\n";
+    cout << "  ╠══════════════════════════════════════════════════╣\n";
+    cout << "  ║  0.  Cargar datos de prueba                      ║\n";
+    cout << "  ║  14. Salir                                       ║\n";
+    cout << "  ╚══════════════════════════════════════════════════╝\n";
+    cout << "  Seleccione una opción: ";
+}
+
+// ============================================================
+//  FUNCIÓN PRINCIPAL: main
+// ============================================================
+int main() {
+    ArbolBST arbol;
+    int opcion;
+
+    cout << "\n";
+    cout << "  ╔══════════════════════════════════════════════════╗\n";
+    cout << "  ║     Bienvenido al Sistema Académico UTA          ║\n";
+    cout << "  ║     Árbol Binario de Búsqueda - C++              ║\n";
+    cout << "  ╚══════════════════════════════════════════════════╝\n";
+    cout << "  [*] Ingrese opción 0 para cargar datos de prueba.\n";
+
+    do {
+        mostrarMenu();
+        cin >> opcion;
+
+        switch (opcion) {
+            case 1: {
+                // ── Insertar estudiante ──────────────────────
+                cout << "\n  ── INSERTAR ESTUDIANTE ───────────────────────\n";
+                limpiarBuffer();
+                Estudiante e = capturarEstudiante();
+                arbol.insertarEstudiante(e);
+                cout << "  ✔ Estudiante insertado correctamente.\n";
+                break;
+            }
+            case 2: {
+                // ── Buscar por cédula ────────────────────────
+                string cedula;
+                cout << "\n  ── BUSCAR ESTUDIANTE ─────────────────────────\n";
+                cout << "  Ingrese la cédula: ";
+                cin >> cedula;
+                arbol.buscarEstudiante(cedula);
+                break;
+            }
+            case 3: {
+                // ── Eliminar estudiante ──────────────────────
+                string cedula;
+                cout << "\n  ── ELIMINAR ESTUDIANTE ───────────────────────\n";
+                cout << "  Ingrese la cédula a eliminar: ";
+                cin >> cedula;
+                arbol.eliminarEstudiante(cedula);
+                break;
+            }
+            case 4:
+                // ── Recorrido Inorden ────────────────────────
+                arbol.recorridoInorden();
+                break;
+            case 5:
+                // ── Recorrido Preorden ───────────────────────
+                arbol.recorridoPreorden();
+                break;
+            case 6:
+                // ── Recorrido Postorden ──────────────────────
+                arbol.recorridoPostorden();
+                break;
+            case 7:
+                // ── BFS por niveles ──────────────────────────
+                arbol.recorridoPorNiveles();
+                break;
+            case 8:
+                // ── Contar nodos ─────────────────────────────
+                arbol.contarNodos();
+                break;
+            case 9:
+                // ── Calcular altura ──────────────────────────
+                arbol.calcularAltura();
+                break;
+            case 10:
+                // ── Mayor nota ───────────────────────────────
+                arbol.buscarNotaMayor();
+                break;
+            case 11:
+                // ── Menor nota ───────────────────────────────
+                arbol.buscarNotaMenor();
+                break;
+            case 12:
+                // ── Aprobados ────────────────────────────────
+                arbol.mostrarAprobados();
+                break;
+            case 13:
+                // ── Reprobados ───────────────────────────────
+                arbol.mostrarReprobados();
+                break;
+            case 0:
+                // ── Datos de prueba ──────────────────────────
+                cout << "\n  ── CARGANDO DATOS DE PRUEBA ──────────────────\n";
+                cargarDatosDePrueba(arbol);
+                break;
+            case 14:
+                cout << "\n  ¡Hasta luego! Sistema cerrado correctamente.\n\n";
+                break;
+            default:
+                cout << "  [!] Opción no válida. Intente de nuevo.\n";
+        }
+
+    } while (opcion != 14);
+
+    return 0;
+}
