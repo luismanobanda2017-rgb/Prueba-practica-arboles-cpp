@@ -1,21 +1,21 @@
 /*
  * ============================================================
- *  UNIVERSIDAD TÉCNICA DE AMBATO
- *  Facultad de Ingeniería en Sistemas, Electrónica e Industrial
+ *  UNIVERSIDAD TECNICA DE AMBATO
+ *  Facultad de Ingenieria en Sistemas, Electronica e Industrial
  *  Asignatura : Estructura de Datos
- *  Tema       : Árboles Binarios de Búsqueda (BST)
- *  Autor      : [Tu nombre aquí]
+ *  Tema       : Arboles Binarios de Busqueda (BST)
+ *  Autor      : [Tu nombre aqui]
  *  Fecha      : 2025
  * ============================================================
  *
- *  DESCRIPCIÓN:
- *  Sistema académico para gestionar estudiantes de la UTA
- *  mediante un Árbol Binario de Búsqueda (BST).
- *  Clave de ordenamiento: Cédula del estudiante.
+ *  DESCRIPCION:
+ *  Sistema academico para gestionar estudiantes de la UTA
+ *  mediante un Arbol Binario de Busqueda (BST).
+ *  Clave de ordenamiento: Cedula del estudiante.
  *
- *  COMPILACIÓN (Dev-C++ / g++):
+ *  COMPILACION (Dev-C++ / g++):
  *    g++ -o sistema_estudiantes sistema_estudiantes.cpp
- *  EJECUCIÓN:
+ *  EJECUCION:
  *    ./sistema_estudiantes   (Linux/Mac)
  *    sistema_estudiantes.exe (Windows)
  * ============================================================
@@ -32,11 +32,11 @@ using namespace std;
 // ============================================================
 //  CONSTANTES GLOBALES
 // ============================================================
-const double NOTA_APROBACION = 7.0;  // Nota mínima para aprobar (sobre 10)
+const double NOTA_APROBACION = 7.0;  // Nota minima para aprobar (sobre 10)
 
 // ============================================================
 //  ESTRUCTURA: Estudiante
-//  Contiene todos los datos académicos de un estudiante.
+//  Contiene todos los datos academicos de un estudiante.
 // ============================================================
 struct Estudiante {
     string cedula;      // Clave primaria del BST
@@ -48,7 +48,7 @@ struct Estudiante {
 };
 
 // ============================================================
-//  ESTRUCTURA: Nodo del Árbol
+//  ESTRUCTURA: Nodo del Arbol
 //  Cada nodo almacena un Estudiante y punteros a hijos.
 // ============================================================
 struct Nodo {
@@ -62,16 +62,16 @@ struct Nodo {
 
 // ============================================================
 //  CLASE: ArbolBST
-//  Implementa el Árbol Binario de Búsqueda con todas las
-//  operaciones requeridas por la prueba práctica.
+//  Implementa el Arbol Binario de Busqueda con todas las
+//  operaciones requeridas por la prueba practica.
 // ============================================================
 class ArbolBST {
 private:
-    Nodo* raiz;  // Puntero a la raíz del árbol
+    Nodo* raiz;  // Puntero a la raiz del arbol
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: insertarRec
-    //  Inserta recursivamente un nuevo nodo en el subárbol.
+    //  FUNCION PRIVADA: insertarRec
+    //  Inserta recursivamente un nuevo nodo en el subarbol.
     //  @param nodo  : nodo actual del recorrido
     //  @param estu  : datos del estudiante a insertar
     //  @return      : nodo actualizado
@@ -85,14 +85,14 @@ private:
         else if (estu.cedula > nodo->datos.cedula)
             nodo->derecho = insertarRec(nodo->derecho, estu);
         else
-            cout << "  [!] Ya existe un estudiante con la cédula: " << estu.cedula << "\n";
+            cout << "  [!] Ya existe un estudiante con la cedula: " << estu.cedula << "\n";
 
         return nodo;
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: buscarRec
-    //  Busca recursivamente un nodo por cédula.
+    //  FUNCION PRIVADA: buscarRec
+    //  Busca recursivamente un nodo por cedula.
     //  @return puntero al nodo encontrado o nullptr
     // --------------------------------------------------------
     Nodo* buscarRec(Nodo* nodo, const string& cedula) {
@@ -106,9 +106,9 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: minimoNodo
-    //  Encuentra el nodo con la cédula más pequeña
-    //  en un subárbol (el más a la izquierda).
+    //  FUNCION PRIVADA: minimoNodo
+    //  Encuentra el nodo con la cedula mas pequenya
+    //  en un subarbol (el mas a la izquierda).
     // --------------------------------------------------------
     Nodo* minimoNodo(Nodo* nodo) {
         Nodo* actual = nodo;
@@ -118,7 +118,7 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: eliminarRec
+    //  FUNCION PRIVADA: eliminarRec
     //  Elimina recursivamente un nodo manteniendo la
     //  propiedad del BST. Usa el sucesor inorden.
     // --------------------------------------------------------
@@ -140,7 +140,7 @@ private:
                 delete nodo;
                 return temp;
             }
-            // Caso: dos hijos → reemplazar con sucesor inorden
+            // Caso: dos hijos -> reemplazar con sucesor inorden
             Nodo* sucesor = minimoNodo(nodo->derecho);
             nodo->datos   = sucesor->datos;
             nodo->derecho = eliminarRec(nodo->derecho, sucesor->datos.cedula);
@@ -149,9 +149,9 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: inordenRec
-    //  Recorrido Inorden: Izquierdo → Raíz → Derecho
-    //  Produce los nodos ordenados por cédula (ascendente).
+    //  FUNCION PRIVADA: inordenRec
+    //  Recorrido Inorden: Izquierdo -> Raiz -> Derecho
+    //  Produce los nodos ordenados por cedula (ascendente).
     // --------------------------------------------------------
     void inordenRec(Nodo* nodo) {
         if (nodo == nullptr) return;
@@ -161,8 +161,8 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: preordenRec
-    //  Recorrido Preorden: Raíz → Izquierdo → Derecho
+    //  FUNCION PRIVADA: preordenRec
+    //  Recorrido Preorden: Raiz -> Izquierdo -> Derecho
     // --------------------------------------------------------
     void preordenRec(Nodo* nodo) {
         if (nodo == nullptr) return;
@@ -172,8 +172,8 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: postordenRec
-    //  Recorrido Postorden: Izquierdo → Derecho → Raíz
+    //  FUNCION PRIVADA: postordenRec
+    //  Recorrido Postorden: Izquierdo -> Derecho -> Raiz
     // --------------------------------------------------------
     void postordenRec(Nodo* nodo) {
         if (nodo == nullptr) return;
@@ -183,8 +183,8 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: contarRec
-    //  Cuenta recursivamente todos los nodos del árbol.
+    //  FUNCION PRIVADA: contarRec
+    //  Cuenta recursivamente todos los nodos del arbol.
     // --------------------------------------------------------
     int contarRec(Nodo* nodo) {
         if (nodo == nullptr) return 0;
@@ -192,9 +192,9 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: alturaRec
-    //  Calcula la altura del árbol recursivamente.
-    //  Altura = número de niveles - 1.
+    //  FUNCION PRIVADA: alturaRec
+    //  Calcula la altura del arbol recursivamente.
+    //  Altura = numero de niveles - 1.
     // --------------------------------------------------------
     int alturaRec(Nodo* nodo) {
         if (nodo == nullptr) return -1;
@@ -204,8 +204,8 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: buscarMaxNotaRec
-    //  Recorre todo el árbol y devuelve el nodo con nota mayor.
+    //  FUNCION PRIVADA: buscarMaxNotaRec
+    //  Recorre todo el arbol y devuelve el nodo con nota mayor.
     // --------------------------------------------------------
     Nodo* buscarMaxNotaRec(Nodo* nodo, Nodo* maxActual) {
         if (nodo == nullptr) return maxActual;
@@ -217,8 +217,8 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: buscarMinNotaRec
-    //  Recorre todo el árbol y devuelve el nodo con nota menor.
+    //  FUNCION PRIVADA: buscarMinNotaRec
+    //  Recorre todo el arbol y devuelve el nodo con nota menor.
     // --------------------------------------------------------
     Nodo* buscarMinNotaRec(Nodo* nodo, Nodo* minActual) {
         if (nodo == nullptr) return minActual;
@@ -230,7 +230,7 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: mostrarAprobadosRec
+    //  FUNCION PRIVADA: mostrarAprobadosRec
     //  Muestra recursivamente estudiantes con nota >= 7.
     // --------------------------------------------------------
     void mostrarAprobadosRec(Nodo* nodo, int& contador) {
@@ -244,7 +244,7 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: mostrarReprobadosRec
+    //  FUNCION PRIVADA: mostrarReprobadosRec
     //  Muestra recursivamente estudiantes con nota < 7.
     // --------------------------------------------------------
     void mostrarReprobadosRec(Nodo* nodo, int& contador) {
@@ -258,8 +258,8 @@ private:
     }
 
     // --------------------------------------------------------
-    //  FUNCIÓN PRIVADA: liberarMemoria
-    //  Libera todos los nodos del árbol (postorden).
+    //  FUNCION PRIVADA: liberarMemoria
+    //  Libera todos los nodos del arbol (postorden).
     // --------------------------------------------------------
     void liberarMemoria(Nodo* nodo) {
         if (nodo == nullptr) return;
@@ -269,20 +269,20 @@ private:
     }
 
 public:
-    // Constructor: árbol vacío
+    // Constructor: arbol vacio
     ArbolBST() : raiz(nullptr) {}
 
-    // Destructor: libera toda la memoria dinámica
+    // Destructor: libera toda la memoria dinamica
     ~ArbolBST() { liberarMemoria(raiz); }
 
     // ============================================================
-    //  MÉTODOS PÚBLICOS
+    //  METODOS PUBLICOS
     // ============================================================
 
     // --------------------------------------------------------
     //  insertarEstudiante()
     //  Inserta un nuevo estudiante en el BST.
-    //  Clave: cédula (orden lexicográfico).
+    //  Clave: cedula (orden lexicografico).
     // --------------------------------------------------------
     void insertarEstudiante(Estudiante estu) {
         raiz = insertarRec(raiz, estu);
@@ -290,41 +290,41 @@ public:
 
     // --------------------------------------------------------
     //  buscarEstudiante()
-    //  Busca y muestra un estudiante por su cédula.
+    //  Busca y muestra un estudiante por su cedula.
     // --------------------------------------------------------
     void buscarEstudiante(const string& cedula) {
         Nodo* resultado = buscarRec(raiz, cedula);
         if (resultado != nullptr) {
-            cout << "\n  ✔ Estudiante encontrado:\n";
+            cout << "\n  [OK] Estudiante encontrado:\n";
             separador();
             mostrarEstudiante(resultado->datos);
             separador();
         } else {
-            cout << "  [!] No se encontró ningún estudiante con cédula: " << cedula << "\n";
+            cout << "  [!] No se encontro ningun estudiante con cedula: " << cedula << "\n";
         }
     }
 
     // --------------------------------------------------------
     //  eliminarEstudiante()
-    //  Elimina un estudiante del BST por su cédula.
+    //  Elimina un estudiante del BST por su cedula.
     // --------------------------------------------------------
     void eliminarEstudiante(const string& cedula) {
         Nodo* existe = buscarRec(raiz, cedula);
         if (existe == nullptr) {
-            cout << "  [!] No existe un estudiante con cédula: " << cedula << "\n";
+            cout << "  [!] No existe un estudiante con cedula: " << cedula << "\n";
             return;
         }
         raiz = eliminarRec(raiz, cedula);
-        cout << "  ✔ Estudiante con cédula " << cedula << " eliminado correctamente.\n";
+        cout << "  [OK] Estudiante con cedula " << cedula << " eliminado correctamente.\n";
     }
 
     // --------------------------------------------------------
     //  recorridoInorden()
-    //  Muestra todos los estudiantes ordenados por cédula.
+    //  Muestra todos los estudiantes ordenados por cedula.
     // --------------------------------------------------------
     void recorridoInorden() {
         if (raiz == nullptr) { sinDatos(); return; }
-        cout << "\n  [INORDEN] Izq → Raíz → Der (ordenado por cédula)\n";
+        cout << "\n  [INORDEN] Izq -> Raiz -> Der (ordenado por cedula)\n";
         separador();
         inordenRec(raiz);
         separador();
@@ -332,11 +332,11 @@ public:
 
     // --------------------------------------------------------
     //  recorridoPreorden()
-    //  Muestra: Raíz → Izquierdo → Derecho.
+    //  Muestra: Raiz -> Izquierdo -> Derecho.
     // --------------------------------------------------------
     void recorridoPreorden() {
         if (raiz == nullptr) { sinDatos(); return; }
-        cout << "\n  [PREORDEN] Raíz → Izq → Der\n";
+        cout << "\n  [PREORDEN] Raiz -> Izq -> Der\n";
         separador();
         preordenRec(raiz);
         separador();
@@ -344,11 +344,11 @@ public:
 
     // --------------------------------------------------------
     //  recorridoPostorden()
-    //  Muestra: Izquierdo → Derecho → Raíz.
+    //  Muestra: Izquierdo -> Derecho -> Raiz.
     // --------------------------------------------------------
     void recorridoPostorden() {
         if (raiz == nullptr) { sinDatos(); return; }
-        cout << "\n  [POSTORDEN] Izq → Der → Raíz\n";
+        cout << "\n  [POSTORDEN] Izq -> Der -> Raiz\n";
         separador();
         postordenRec(raiz);
         separador();
@@ -387,7 +387,7 @@ public:
 
     // --------------------------------------------------------
     //  contarNodos()
-    //  Retorna y muestra el total de estudiantes en el árbol.
+    //  Retorna y muestra el total de estudiantes en el arbol.
     // --------------------------------------------------------
     void contarNodos() {
         int total = contarRec(raiz);
@@ -396,25 +396,25 @@ public:
 
     // --------------------------------------------------------
     //  calcularAltura()
-    //  Calcula y muestra la altura del árbol.
-    //  Árbol vacío = -1 | Solo raíz = 0.
+    //  Calcula y muestra la altura del arbol.
+    //  Arbol vacio = -1 | Solo raiz = 0.
     // --------------------------------------------------------
     void calcularAltura() {
         int h = alturaRec(raiz);
-        cout << "\n  Altura del árbol: " << h;
-        if (h == -1) cout << " (árbol vacío)";
-        else if (h == 0) cout << " (solo la raíz)";
+        cout << "\n  Altura del arbol: " << h;
+        if (h == -1) cout << " (arbol vacio)";
+        else if (h == 0) cout << " (solo la raiz)";
         cout << "\n";
     }
 
     // --------------------------------------------------------
     //  buscarNotaMayor()
-    //  Encuentra y muestra el estudiante con la nota más alta.
+    //  Encuentra y muestra el estudiante con la nota mas alta.
     // --------------------------------------------------------
     void buscarNotaMayor() {
         if (raiz == nullptr) { sinDatos(); return; }
         Nodo* resultado = buscarMaxNotaRec(raiz, nullptr);
-        cout << "\n  ★ Estudiante con MAYOR nota:\n";
+        cout << "\n  [*] Estudiante con MAYOR nota:\n";
         separador();
         mostrarEstudiante(resultado->datos);
         separador();
@@ -422,12 +422,12 @@ public:
 
     // --------------------------------------------------------
     //  buscarNotaMenor()
-    //  Encuentra y muestra el estudiante con la nota más baja.
+    //  Encuentra y muestra el estudiante con la nota mas baja.
     // --------------------------------------------------------
     void buscarNotaMenor() {
         if (raiz == nullptr) { sinDatos(); return; }
         Nodo* resultado = buscarMinNotaRec(raiz, nullptr);
-        cout << "\n  ★ Estudiante con MENOR nota:\n";
+        cout << "\n  [*] Estudiante con MENOR nota:\n";
         separador();
         mostrarEstudiante(resultado->datos);
         separador();
@@ -440,7 +440,7 @@ public:
     void mostrarAprobados() {
         if (raiz == nullptr) { sinDatos(); return; }
         int contador = 0;
-        cout << "\n  ✔ ESTUDIANTES APROBADOS (nota >= " << NOTA_APROBACION << "):\n";
+        cout << "\n  [OK] ESTUDIANTES APROBADOS (nota >= " << NOTA_APROBACION << "):\n";
         separador();
         mostrarAprobadosRec(raiz, contador);
         separador();
@@ -454,7 +454,7 @@ public:
     void mostrarReprobados() {
         if (raiz == nullptr) { sinDatos(); return; }
         int contador = 0;
-        cout << "\n  ✗ ESTUDIANTES REPROBADOS (nota < " << NOTA_APROBACION << "):\n";
+        cout << "\n  [X] ESTUDIANTES REPROBADOS (nota < " << NOTA_APROBACION << "):\n";
         separador();
         mostrarReprobadosRec(raiz, contador);
         separador();
@@ -462,30 +462,30 @@ public:
     }
 
     // ============================================================
-    //  UTILIDADES DE VISUALIZACIÓN
+    //  UTILIDADES DE VISUALIZACION
     // ============================================================
 
     // Imprime los datos de un estudiante en formato tabla
     void mostrarEstudiante(const Estudiante& e) {
-        cout << "  ┌─────────────────────────────────────────────┐\n";
-        cout << "  │ Cédula   : " << left << setw(34) << e.cedula    << "│\n";
-        cout << "  │ Apellidos: " << left << setw(34) << e.apellidos << "│\n";
-        cout << "  │ Nombres  : " << left << setw(34) << e.nombres   << "│\n";
-        cout << "  │ Carrera  : " << left << setw(34) << e.carrera   << "│\n";
-        cout << "  │ Nivel    : " << left << setw(34) << e.nivel     << "│\n";
+        cout << "  +-----------------------------------------------+\n";
+        cout << "  | Cedula   : " << left << setw(34) << e.cedula    << "|\n";
+        cout << "  | Apellidos: " << left << setw(34) << e.apellidos << "|\n";
+        cout << "  | Nombres  : " << left << setw(34) << e.nombres   << "|\n";
+        cout << "  | Carrera  : " << left << setw(34) << e.carrera   << "|\n";
+        cout << "  | Nivel    : " << left << setw(34) << e.nivel     << "|\n";
         cout << fixed << setprecision(2);
-        string estado = (e.notaFinal >= NOTA_APROBACION) ? "APROBADO ✔" : "REPROBADO ✗";
-        cout << "  │ Nota     : " << left << setw(8)  << e.notaFinal
-             << " " << left << setw(25) << estado << "│\n";
-        cout << "  └─────────────────────────────────────────────┘\n";
+        string estado = (e.notaFinal >= NOTA_APROBACION) ? "APROBADO [OK]" : "REPROBADO [X]";
+        cout << "  | Nota     : " << left << setw(8)  << e.notaFinal
+             << " " << left << setw(25) << estado << "|\n";
+        cout << "  +-----------------------------------------------+\n";
     }
 
     void separador() {
-        cout << "  ─────────────────────────────────────────────────\n";
+        cout << "  -------------------------------------------------\n";
     }
 
     void sinDatos() {
-        cout << "  [!] El árbol está vacío. No hay estudiantes registrados.\n";
+        cout << "  [!] El arbol esta vacio. No hay estudiantes registrados.\n";
     }
 };
 
@@ -498,7 +498,7 @@ void limpiarBuffer() {
     cin.ignore(numeric_limits<streamsize>::max(), '\n');
 }
 
-// Valida que la cédula tenga exactamente 10 dígitos numéricos
+// Valida que la cedula tenga exactamente 10 digitos numericos
 bool validarCedula(const string& cedula) {
     if (cedula.length() != 10) return false;
     for (char c : cedula)
@@ -506,7 +506,7 @@ bool validarCedula(const string& cedula) {
     return true;
 }
 
-// Valida que la nota esté en el rango [0, 10]
+// Valida que la nota este en el rango [0, 10]
 bool validarNota(double nota) {
     return (nota >= 0.0 && nota <= 10.0);
 }
@@ -516,10 +516,10 @@ Estudiante capturarEstudiante() {
     Estudiante e;
 
     do {
-        cout << "  Cédula (10 dígitos): ";
+        cout << "  Cedula (10 digitos): ";
         cin >> e.cedula;
         if (!validarCedula(e.cedula))
-            cout << "  [!] Cédula inválida. Debe tener exactamente 10 dígitos.\n";
+            cout << "  [!] Cedula invalida. Debe tener exactamente 10 digitos.\n";
     } while (!validarCedula(e.cedula));
 
     limpiarBuffer();
@@ -542,25 +542,21 @@ Estudiante capturarEstudiante() {
         cout << "  Nota final (0-10)  : ";
         cin >> e.notaFinal;
         if (!validarNota(e.notaFinal))
-            cout << "  [!] Nota inválida. Debe estar entre 0.0 y 10.0\n";
+            cout << "  [!] Nota invalida. Debe estar entre 0.0 y 10.0\n";
     } while (!validarNota(e.notaFinal));
 
     return e;
 }
 
 // ============================================================
-//  FUNCIÓN: cargarDatosDePrueba
+//  FUNCION: cargarDatosDePrueba
 //  Inserta 8 estudiantes de ejemplo para facilitar las pruebas.
 // ============================================================
 void cargarDatosDePrueba(ArbolBST& arbol) {
     Estudiante datos[] = {
-        {"1804567890", "Tobar Ramirez",    "Carlos Andres",  8.5, "Sistemas",     3},
         {"1802345678", "Moreta Guevara",   "Ana Lucia",      6.5, "Industrial",   2},
-        {"1806789012", "Salazar Vega",     "Luis Fernando",  9.2, "Civil",        4},
         {"1801234567", "Alvarez Torres",   "Maria Jose",     5.8, "Sistemas",     1},
         {"1805678901", "Perez Castillo",   "Juan Pablo",     7.0, "Electronica",  3},
-        {"1803456789", "Flores Naranjo",   "Sofia Isabella", 4.3, "Industrial",   2},
-        {"1807890123", "Zambrano Lara",    "Diego Alejandro",8.9, "Civil",        5},
         {"1808901234", "Herrera Montoya",  "Valeria Nicole", 7.5, "Sistemas",     4}
     };
 
@@ -568,55 +564,55 @@ void cargarDatosDePrueba(ArbolBST& arbol) {
     for (int i = 0; i < n; i++)
         arbol.insertarEstudiante(datos[i]);
 
-    cout << "  ✔ Se cargaron " << n << " estudiantes de prueba correctamente.\n";
+    cout << "  [OK] Se cargaron " << n << " estudiantes de prueba correctamente.\n";
 }
 
 // ============================================================
-//  FUNCIÓN: mostrarMenu
-//  Despliega el menú principal del sistema.
+//  FUNCION: mostrarMenu
+//  Despliega el menu principal del sistema.
 // ============================================================
 void mostrarMenu() {
     cout << "\n";
-    cout << "  ╔══════════════════════════════════════════════════╗\n";
-    cout << "  ║   UNIVERSIDAD TÉCNICA DE AMBATO                  ║\n";
-    cout << "  ║   Sistema de Gestión Académica - Árbol BST       ║\n";
-    cout << "  ╠══════════════════════════════════════════════════╣\n";
-    cout << "  ║  1.  Insertar estudiante                         ║\n";
-    cout << "  ║  2.  Buscar estudiante por cédula                ║\n";
-    cout << "  ║  3.  Eliminar estudiante                         ║\n";
-    cout << "  ╠══════════════════════════════════════════════════╣\n";
-    cout << "  ║  4.  Recorrido Inorden                           ║\n";
-    cout << "  ║  5.  Recorrido Preorden                          ║\n";
-    cout << "  ║  6.  Recorrido Postorden                         ║\n";
-    cout << "  ║  7.  Recorrido por niveles (BFS)                 ║\n";
-    cout << "  ╠══════════════════════════════════════════════════╣\n";
-    cout << "  ║  8.  Contar estudiantes                          ║\n";
-    cout << "  ║  9.  Calcular altura del árbol                   ║\n";
-    cout << "  ║  10. Mostrar estudiante con mayor nota           ║\n";
-    cout << "  ║  11. Mostrar estudiante con menor nota           ║\n";
-    cout << "  ╠══════════════════════════════════════════════════╣\n";
-    cout << "  ║  12. Mostrar estudiantes aprobados               ║\n";
-    cout << "  ║  13. Mostrar estudiantes reprobados              ║\n";
-    cout << "  ╠══════════════════════════════════════════════════╣\n";
-    cout << "  ║  0.  Cargar datos de prueba                      ║\n";
-    cout << "  ║  14. Salir                                       ║\n";
-    cout << "  ╚══════════════════════════════════════════════════╝\n";
-    cout << "  Seleccione una opción: ";
+    cout << "  +===================================================+\n";
+    cout << "  |   UNIVERSIDAD TECNICA DE AMBATO                   |\n";
+    cout << "  |   Sistema de Gestion Academica - Arbol BST        |\n";
+    cout << "  +===================================================+\n";
+    cout << "  |  1.  Insertar estudiante                          |\n";
+    cout << "  |  2.  Buscar estudiante por cedula                 |\n";
+    cout << "  |  3.  Eliminar estudiante                          |\n";
+    cout << "  +---------------------------------------------------+\n";
+    cout << "  |  4.  Recorrido Inorden                            |\n";
+    cout << "  |  5.  Recorrido Preorden                           |\n";
+    cout << "  |  6.  Recorrido Postorden                          |\n";
+    cout << "  |  7.  Recorrido por niveles (BFS)                  |\n";
+    cout << "  +---------------------------------------------------+\n";
+    cout << "  |  8.  Contar estudiantes                           |\n";
+    cout << "  |  9.  Calcular altura del arbol                    |\n";
+    cout << "  |  10. Mostrar estudiante con mayor nota            |\n";
+    cout << "  |  11. Mostrar estudiante con menor nota            |\n";
+    cout << "  +---------------------------------------------------+\n";
+    cout << "  |  12. Mostrar estudiantes aprobados                |\n";
+    cout << "  |  13. Mostrar estudiantes reprobados               |\n";
+    cout << "  +---------------------------------------------------+\n";
+    cout << "  |  0.  Cargar datos de prueba                       |\n";
+    cout << "  |  14. Salir                                        |\n";
+    cout << "  +===================================================+\n";
+    cout << "  Seleccione una opcion: ";
 }
 
 // ============================================================
-//  FUNCIÓN PRINCIPAL: main
+//  FUNCION PRINCIPAL: main
 // ============================================================
 int main() {
     ArbolBST arbol;
     int opcion;
 
     cout << "\n";
-    cout << "  ╔══════════════════════════════════════════════════╗\n";
-    cout << "  ║     Bienvenido al Sistema Académico UTA          ║\n";
-    cout << "  ║     Árbol Binario de Búsqueda - C++              ║\n";
-    cout << "  ╚══════════════════════════════════════════════════╝\n";
-    cout << "  [*] Ingrese opción 0 para cargar datos de prueba.\n";
+    cout << "  +===================================================+\n";
+    cout << "  |     Bienvenido al Sistema Academico UTA           |\n";
+    cout << "  |     Arbol Binario de Busqueda - C++               |\n";
+    cout << "  +===================================================+\n";
+    cout << "  [*] Ingrese opcion 0 para cargar datos de prueba.\n";
 
     do {
         mostrarMenu();
@@ -624,86 +620,85 @@ int main() {
 
         switch (opcion) {
             case 1: {
-                // ── Insertar estudiante ──────────────────────
-                cout << "\n  ── INSERTAR ESTUDIANTE ───────────────────────\n";
+                // -- Insertar estudiante ----------------------
+                cout << "\n  -- INSERTAR ESTUDIANTE -------------------------\n";
                 limpiarBuffer();
                 Estudiante e = capturarEstudiante();
                 arbol.insertarEstudiante(e);
-                cout << "  ✔ Estudiante insertado correctamente.\n";
+                cout << "  [OK] Estudiante insertado correctamente.\n";
                 break;
             }
             case 2: {
-                // ── Buscar por cédula ────────────────────────
+                // -- Buscar por cedula ------------------------
                 string cedula;
-                cout << "\n  ── BUSCAR ESTUDIANTE ─────────────────────────\n";
-                cout << "  Ingrese la cédula: ";
+                cout << "\n  -- BUSCAR ESTUDIANTE ---------------------------\n";
+                cout << "  Ingrese la cedula: ";
                 cin >> cedula;
                 arbol.buscarEstudiante(cedula);
                 break;
             }
             case 3: {
-                // ── Eliminar estudiante ──────────────────────
+                // -- Eliminar estudiante ----------------------
                 string cedula;
-                cout << "\n  ── ELIMINAR ESTUDIANTE ───────────────────────\n";
-                cout << "  Ingrese la cédula a eliminar: ";
+                cout << "\n  -- ELIMINAR ESTUDIANTE -------------------------\n";
+                cout << "  Ingrese la cedula a eliminar: ";
                 cin >> cedula;
                 arbol.eliminarEstudiante(cedula);
                 break;
             }
             case 4:
-                // ── Recorrido Inorden ────────────────────────
+                // -- Recorrido Inorden ------------------------
                 arbol.recorridoInorden();
                 break;
             case 5:
-                // ── Recorrido Preorden ───────────────────────
+                // -- Recorrido Preorden -----------------------
                 arbol.recorridoPreorden();
                 break;
             case 6:
-                // ── Recorrido Postorden ──────────────────────
+                // -- Recorrido Postorden ----------------------
                 arbol.recorridoPostorden();
                 break;
             case 7:
-                // ── BFS por niveles ──────────────────────────
+                // -- BFS por niveles --------------------------
                 arbol.recorridoPorNiveles();
                 break;
             case 8:
-                // ── Contar nodos ─────────────────────────────
+                // -- Contar nodos -----------------------------
                 arbol.contarNodos();
                 break;
             case 9:
-                // ── Calcular altura ──────────────────────────
+                // -- Calcular altura --------------------------
                 arbol.calcularAltura();
                 break;
             case 10:
-                // ── Mayor nota ───────────────────────────────
+                // -- Mayor nota -------------------------------
                 arbol.buscarNotaMayor();
                 break;
             case 11:
-                // ── Menor nota ───────────────────────────────
+                // -- Menor nota -------------------------------
                 arbol.buscarNotaMenor();
                 break;
             case 12:
-                // ── Aprobados ────────────────────────────────
+                // -- Aprobados --------------------------------
                 arbol.mostrarAprobados();
                 break;
             case 13:
-                // ── Reprobados ───────────────────────────────
+                // -- Reprobados -------------------------------
                 arbol.mostrarReprobados();
                 break;
             case 0:
-                // ── Datos de prueba ──────────────────────────
-                cout << "\n  ── CARGANDO DATOS DE PRUEBA ──────────────────\n";
+                // -- Datos de prueba --------------------------
+                cout << "\n  -- CARGANDO DATOS DE PRUEBA --------------------\n";
                 cargarDatosDePrueba(arbol);
                 break;
             case 14:
-                cout << "\n  ¡Hasta luego! Sistema cerrado correctamente.\n\n";
+                cout << "\n  Hasta luego! Sistema cerrado correctamente.\n\n";
                 break;
             default:
-                cout << "  [!] Opción no válida. Intente de nuevo.\n";
+                cout << "  [!] Opcion no valida. Intente de nuevo.\n";
         }
 
     } while (opcion != 14);
 
     return 0;
 }
-

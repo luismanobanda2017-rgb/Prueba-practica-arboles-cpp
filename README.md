@@ -4,7 +4,7 @@
 **Asignatura:** Estructura de Datos  
 **Tema:** Árboles Binarios de Búsqueda  
 **Lenguaje:** C++  
-**Autor:** [Luis Manobanda]
+**Autor:** Luis Manobanda
 
 ---
 
@@ -180,4 +180,4 @@ Recorre el árbol **nivel por nivel**, de arriba hacia abajo, usando una `queue<
 
 ---
 
-*Estructura de Datos — UTA 2025*
+*Estructura de Datos — UTA 2026*
