@@ -229,3 +229,235 @@ private:
         return minActual;
     }
 
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: mostrarAprobadosRec
+    //  Muestra recursivamente estudiantes con nota >= 7.
+    // --------------------------------------------------------
+    void mostrarAprobadosRec(Nodo* nodo, int& contador) {
+        if (nodo == nullptr) return;
+        mostrarAprobadosRec(nodo->izquierdo, contador);
+        if (nodo->datos.notaFinal >= NOTA_APROBACION) {
+            mostrarEstudiante(nodo->datos);
+            contador++;
+        }
+        mostrarAprobadosRec(nodo->derecho, contador);
+    }
+
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: mostrarReprobadosRec
+    //  Muestra recursivamente estudiantes con nota < 7.
+    // --------------------------------------------------------
+    void mostrarReprobadosRec(Nodo* nodo, int& contador) {
+        if (nodo == nullptr) return;
+        mostrarReprobadosRec(nodo->izquierdo, contador);
+        if (nodo->datos.notaFinal < NOTA_APROBACION) {
+            mostrarEstudiante(nodo->datos);
+            contador++;
+        }
+        mostrarReprobadosRec(nodo->derecho, contador);
+    }
+
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: liberarMemoria
+    //  Libera todos los nodos del árbol (postorden).
+    // --------------------------------------------------------
+    void liberarMemoria(Nodo* nodo) {
+        if (nodo == nullptr) return;
+        liberarMemoria(nodo->izquierdo);
+        liberarMemoria(nodo->derecho);
+        delete nodo;
+    }
+
+public:
+    // Constructor: árbol vacío
+    ArbolBST() : raiz(nullptr) {}
+
+    // Destructor: libera toda la memoria dinámica
+    ~ArbolBST() { liberarMemoria(raiz); }
+
+    // ============================================================
+    //  MÉTODOS PÚBLICOS
+    // ============================================================
+
+    // --------------------------------------------------------
+    //  insertarEstudiante()
+    //  Inserta un nuevo estudiante en el BST.
+    //  Clave: cédula (orden lexicográfico).
+    // --------------------------------------------------------
+    void insertarEstudiante(Estudiante estu) {
+        raiz = insertarRec(raiz, estu);
+    }
+
+    // --------------------------------------------------------
+    //  buscarEstudiante()
+    //  Busca y muestra un estudiante por su cédula.
+    // --------------------------------------------------------
+    void buscarEstudiante(const string& cedula) {
+        Nodo* resultado = buscarRec(raiz, cedula);
+        if (resultado != nullptr) {
+            cout << "\n  ✔ Estudiante encontrado:\n";
+            separador();
+            mostrarEstudiante(resultado->datos);
+            separador();
+        } else {
+            cout << "  [!] No se encontró ningún estudiante con cédula: " << cedula << "\n";
+        }
+    }
+
+    // --------------------------------------------------------
+    //  eliminarEstudiante()
+    //  Elimina un estudiante del BST por su cédula.
+    // --------------------------------------------------------
+    void eliminarEstudiante(const string& cedula) {
+        Nodo* existe = buscarRec(raiz, cedula);
+        if (existe == nullptr) {
+            cout << "  [!] No existe un estudiante con cédula: " << cedula << "\n";
+            return;
+        }
+        raiz = eliminarRec(raiz, cedula);
+        cout << "  ✔ Estudiante con cédula " << cedula << " eliminado correctamente.\n";
+    }
+
+    // --------------------------------------------------------
+    //  recorridoInorden()
+    //  Muestra todos los estudiantes ordenados por cédula.
+    // --------------------------------------------------------
+    void recorridoInorden() {
+        if (raiz == nullptr) { sinDatos(); return; }
+        cout << "\n  [INORDEN] Izq → Raíz → Der (ordenado por cédula)\n";
+        separador();
+        inordenRec(raiz);
+        separador();
+    }
+
+    // --------------------------------------------------------
+    //  recorridoPreorden()
+    //  Muestra: Raíz → Izquierdo → Derecho.
+    // --------------------------------------------------------
+    void recorridoPreorden() {
+        if (raiz == nullptr) { sinDatos(); return; }
+        cout << "\n  [PREORDEN] Raíz → Izq → Der\n";
+        separador();
+        preordenRec(raiz);
+        separador();
+    }
+
+    // --------------------------------------------------------
+    //  recorridoPostorden()
+    //  Muestra: Izquierdo → Derecho → Raíz.
+    // --------------------------------------------------------
+    void recorridoPostorden() {
+        if (raiz == nullptr) { sinDatos(); return; }
+        cout << "\n  [POSTORDEN] Izq → Der → Raíz\n";
+        separador();
+        postordenRec(raiz);
+        separador();
+    }
+
+    // --------------------------------------------------------
+    //  recorridoPorNiveles()
+    //  BFS (Breadth-First Search) usando una cola (queue).
+    //  Recorre nivel por nivel de arriba hacia abajo.
+    // --------------------------------------------------------
+    void recorridoPorNiveles() {
+        if (raiz == nullptr) { sinDatos(); return; }
+        cout << "\n  [BFS - POR NIVELES] Nivel por nivel\n";
+        separador();
+
+        queue<Nodo*> cola;
+        cola.push(raiz);
+        int nivel = 0;
+
+        while (!cola.empty()) {
+            int tamNivel = cola.size();
+            cout << "  Nivel " << nivel << ":\n";
+
+            for (int i = 0; i < tamNivel; i++) {
+                Nodo* actual = cola.front();
+                cola.pop();
+                mostrarEstudiante(actual->datos);
+
+                if (actual->izquierdo != nullptr) cola.push(actual->izquierdo);
+                if (actual->derecho   != nullptr) cola.push(actual->derecho);
+            }
+            nivel++;
+        }
+        separador();
+    }
+
+    // --------------------------------------------------------
+    //  contarNodos()
+    //  Retorna y muestra el total de estudiantes en el árbol.
+    // --------------------------------------------------------
+    void contarNodos() {
+        int total = contarRec(raiz);
+        cout << "\n  Total de estudiantes registrados: " << total << "\n";
+    }
+
+    // --------------------------------------------------------
+    //  calcularAltura()
+    //  Calcula y muestra la altura del árbol.
+    //  Árbol vacío = -1 | Solo raíz = 0.
+    // --------------------------------------------------------
+    void calcularAltura() {
+        int h = alturaRec(raiz);
+        cout << "\n  Altura del árbol: " << h;
+        if (h == -1) cout << " (árbol vacío)";
+        else if (h == 0) cout << " (solo la raíz)";
+        cout << "\n";
+    }
+
+    // --------------------------------------------------------
+    //  buscarNotaMayor()
+    //  Encuentra y muestra el estudiante con la nota más alta.
+    // --------------------------------------------------------
+    void buscarNotaMayor() {
+        if (raiz == nullptr) { sinDatos(); return; }
+        Nodo* resultado = buscarMaxNotaRec(raiz, nullptr);
+        cout << "\n  ★ Estudiante con MAYOR nota:\n";
+        separador();
+        mostrarEstudiante(resultado->datos);
+        separador();
+    }
+
+    // --------------------------------------------------------
+    //  buscarNotaMenor()
+    //  Encuentra y muestra el estudiante con la nota más baja.
+    // --------------------------------------------------------
+    void buscarNotaMenor() {
+        if (raiz == nullptr) { sinDatos(); return; }
+        Nodo* resultado = buscarMinNotaRec(raiz, nullptr);
+        cout << "\n  ★ Estudiante con MENOR nota:\n";
+        separador();
+        mostrarEstudiante(resultado->datos);
+        separador();
+    }
+
+    // --------------------------------------------------------
+    //  mostrarAprobados()
+    //  Lista todos los estudiantes con nota >= 7.0.
+    // --------------------------------------------------------
+    void mostrarAprobados() {
+        if (raiz == nullptr) { sinDatos(); return; }
+        int contador = 0;
+        cout << "\n  ✔ ESTUDIANTES APROBADOS (nota >= " << NOTA_APROBACION << "):\n";
+        separador();
+        mostrarAprobadosRec(raiz, contador);
+        separador();
+        cout << "  Total aprobados: " << contador << "\n";
+    }
+
+    // --------------------------------------------------------
+    //  mostrarReprobados()
+    //  Lista todos los estudiantes con nota < 7.0.
+    // --------------------------------------------------------
+    void mostrarReprobados() {
+        if (raiz == nullptr) { sinDatos(); return; }
+        int contador = 0;
+        cout << "\n  ✗ ESTUDIANTES REPROBADOS (nota < " << NOTA_APROBACION << "):\n";
+        separador();
+        mostrarReprobadosRec(raiz, contador);
+        separador();
+        cout << "  Total reprobados: " << contador << "\n";
+    }
+
