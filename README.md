@@ -247,7 +247,8 @@ Recorre el árbol nivel por nivel utilizando `queue<Nodo*>`.
 
 # 📝 Conclusiones
 
-### 1. El BST permitió gestionar estudiantes de manera eficiente mediante operaciones rápidas de inserción y búsqueda.
+### 1.
+El BST permitió gestionar estudiantes de manera eficiente mediante operaciones rápidas de inserción y búsqueda.
 
 ### 2.
 La implementación en C++ fortaleció el manejo de punteros, memoria dinámica y recursividad.
