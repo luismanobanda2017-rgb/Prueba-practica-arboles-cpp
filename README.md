@@ -247,27 +247,21 @@ Recorre el árbol nivel por nivel utilizando `queue<Nodo*>`.
 
 # 📝 Conclusiones
 
-### 1.
 - El BST permitió gestionar estudiantes de manera eficiente mediante operaciones rápidas de inserción y búsqueda.
 
-### 2.
-La implementación en C++ fortaleció el manejo de punteros, memoria dinámica y recursividad.
+- La implementación en C++ fortaleció el manejo de punteros, memoria dinámica y recursividad.
 
-### 3.
-Los recorridos demostraron diferentes formas de visualizar la estructura del árbol según la necesidad del sistema.
+- Los recorridos demostraron diferentes formas de visualizar la estructura del árbol según la necesidad del sistema.
 
 ---
 
 # 💡 Recomendaciones
 
-### 1.
-Implementar árboles AVL o Rojo-Negro para evitar desbalanceo.
+- Implementar árboles AVL o Rojo-Negro para evitar desbalanceo.
 
-### 2.
-Agregar persistencia mediante archivos para conservar información.
+- Agregar persistencia mediante archivos para conservar información.
 
-### 3.
-Mejorar validaciones y manejo de errores del sistema.
+- Mejorar validaciones y manejo de errores del sistema.
 
 ---
 
