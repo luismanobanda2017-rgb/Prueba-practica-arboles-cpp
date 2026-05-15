@@ -4,7 +4,32 @@
 **Asignatura:** Estructura de Datos  
 **Tema:** Árboles Binarios de Búsqueda  
 **Lenguaje:** C++  
-**Autor:** Luis Manobanda
+**Autor:** Manobanda Masabanda Luis Alfredo  
+**Curso:** 3ro B  
+**Carrera:** Ingeniería en Software  
+**Docente:** Ing. José Caiza, Mg.
+
+---
+
+## 📖 Introducción
+
+Los árboles binarios de búsqueda (BST) son estructuras de datos fundamentales en la informática que permiten organizar, insertar y recuperar información de manera eficiente con una complejidad promedio de O(log n). Este proyecto aplica dicha estructura para gestionar registros académicos de estudiantes de la Universidad Técnica de Ambato, utilizando la cédula de identidad como clave de ordenamiento. A través de su implementación en C++, se refuerzan conceptos esenciales como la recursividad, el manejo dinámico de memoria y los recorridos en árboles.
+
+---
+
+## 🎯 Objetivo General
+
+Desarrollar un sistema de gestión académica en C++ basado en un Árbol Binario de Búsqueda que permita registrar, buscar, eliminar y analizar información de estudiantes de forma eficiente, aplicando los principios de las estructuras de datos dinámicas estudiados en la asignatura.
+
+---
+
+## 📌 Objetivos Específicos
+
+1. **Implementar las operaciones fundamentales del BST** (inserción, búsqueda y eliminación) utilizando recursividad y manejo dinámico de punteros en C++, garantizando la integridad del árbol en cada operación.
+
+2. **Aplicar los cuatro tipos de recorrido del árbol** (Inorden, Preorden, Postorden y BFS por niveles) para visualizar la información de los estudiantes en distintos órdenes y comprender la estructura jerárquica del árbol.
+
+3. **Incorporar funciones de análisis académico** como el cálculo de la altura del árbol, conteo de nodos, identificación de notas máximas y mínimas, y filtrado de estudiantes aprobados y reprobados, evidenciando la utilidad práctica del BST.
 
 ---
 
@@ -31,8 +56,6 @@ El sistema permite insertar, buscar, eliminar y recorrer estudiantes de forma ef
 ---
 
 ## 📁 Estructura del Repositorio
-
-```
 prueba-practica-arboles-cpp-java/
 ├── src/
 │   └── sistema_estudiantes.cpp    ← Código fuente principal
@@ -43,7 +66,6 @@ prueba-practica-arboles-cpp-java/
 │   ├── captura_bfs.png
 │   └── captura_funciones.png
 └── README.md
-```
 
 ---
 
@@ -91,8 +113,6 @@ Cada nodo del árbol almacena:
 ---
 
 ## 📌 Menú del Sistema
-
-```
 ╔══════════════════════════════════════════════════╗
 ║   UNIVERSIDAD TÉCNICA DE AMBATO                  ║
 ║   Sistema de Gestión Académica - Árbol BST       ║
@@ -117,7 +137,6 @@ Cada nodo del árbol almacena:
 ║  0.  Cargar datos de prueba                      ║
 ║  14. Salir                                       ║
 ╚══════════════════════════════════════════════════╝
-```
 
 ---
 
@@ -177,6 +196,26 @@ Recorre el árbol **nivel por nivel**, de arriba hacia abajo, usando una `queue<
 | `captura_recorridos.png` | Inorden, Preorden, Postorden |
 | `captura_bfs.png` | Recorrido por niveles |
 | `captura_funciones.png` | Altura, conteo, notas |
+
+---
+
+## 📝 Conclusiones
+
+1. **El BST demostró ser una estructura eficiente para la gestión académica**, permitiendo insertar y buscar estudiantes en tiempo O(log n) en promedio, lo que lo hace escalable para conjuntos de datos de mayor tamaño.
+
+2. **La implementación en C++ con manejo dinámico de memoria** fortaleció la comprensión del ciclo de vida de los objetos, evidenciando la importancia del destructor y el uso correcto de punteros para evitar fugas de memoria.
+
+3. **Los cuatro tipos de recorrido aplicados** mostraron cómo una misma estructura puede ser consultada de formas distintas según la necesidad, siendo el recorrido Inorden el más útil para presentar datos ordenados y el BFS para visualizar la jerarquía del árbol.
+
+---
+
+## 💡 Recomendaciones
+
+1. **Implementar un árbol AVL o árbol rojo-negro** como mejora futura, ya que el BST simple puede degenerarse en una lista enlazada si los datos se insertan en orden ascendente o descendente, perdiendo su eficiencia característica.
+
+2. **Agregar persistencia de datos** mediante archivos de texto o binarios, de manera que los registros de estudiantes se conserven entre ejecuciones del programa y no se pierdan al cerrar la aplicación.
+
+3. **Ampliar las validaciones de entrada** para cubrir casos como nombres con caracteres especiales, cédulas duplicadas con mensaje de error descriptivo, y notas fuera de rango, mejorando así la robustez y experiencia de uso del sistema.
 
 ---
 
