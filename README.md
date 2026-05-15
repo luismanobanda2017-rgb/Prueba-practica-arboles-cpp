@@ -168,7 +168,7 @@ Recorre el árbol **nivel por nivel**, de arriba hacia abajo, usando una `queue<
 
 ## 🖼️ Capturas de Pantalla
 
-*(Agregar capturas después de ejecutar el programa)*
+*Capturas de la ejecucion del programa*
 
 | Captura | Descripción |
 |---|---|
