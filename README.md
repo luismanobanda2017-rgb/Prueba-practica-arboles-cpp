@@ -146,28 +146,28 @@ g++ -std=c++11 -o sistema_estudiantes src/sistema_estudiantes.cpp
 
 ```text
 ╔══════════════════════════════════════════════════╗
-║        UNIVERSIDAD TÉCNICA DE AMBATO            ║
-║     Sistema de Gestión Académica - BST          ║
+║        UNIVERSIDAD TÉCNICA DE AMBATO             ║
+║     Sistema de Gestión Académica - BST           ║
 ╠══════════════════════════════════════════════════╣
-║  1. Insertar estudiante                         ║
-║  2. Buscar estudiante por cédula                ║
-║  3. Eliminar estudiante                         ║
+║  1. Insertar estudiante                          ║
+║  2. Buscar estudiante por cédula                 ║
+║  3. Eliminar estudiante                          ║
 ╠══════════════════════════════════════════════════╣
-║  4. Recorrido Inorden                           ║
-║  5. Recorrido Preorden                          ║
-║  6. Recorrido Postorden                         ║
-║  7. Recorrido por niveles (BFS)                 ║
+║  4. Recorrido Inorden                            ║
+║  5. Recorrido Preorden                           ║
+║  6. Recorrido Postorden                          ║
+║  7. Recorrido por niveles (BFS)                  ║
 ╠══════════════════════════════════════════════════╣
-║  8. Contar estudiantes                          ║
-║  9. Calcular altura del árbol                   ║
-║ 10. Mostrar estudiante con mayor nota           ║
-║ 11. Mostrar estudiante con menor nota           ║
+║  8. Contar estudiantes                           ║
+║  9. Calcular altura del árbol                    ║
+║ 10. Mostrar estudiante con mayor nota            ║
+║ 11. Mostrar estudiante con menor nota            ║
 ╠══════════════════════════════════════════════════╣
-║ 12. Mostrar estudiantes aprobados               ║
-║ 13. Mostrar estudiantes reprobados              ║
+║ 12. Mostrar estudiantes aprobados                ║
+║ 13. Mostrar estudiantes reprobados               ║
 ╠══════════════════════════════════════════════════╣
-║  0. Cargar datos de prueba                      ║
-║ 14. Salir                                       ║
+║  0. Cargar datos de prueba                       ║
+║ 14. Salir                                        ║
 ╚══════════════════════════════════════════════════╝
 ```
 
