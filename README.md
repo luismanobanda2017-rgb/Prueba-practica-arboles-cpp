@@ -4,7 +4,7 @@
 **Asignatura:** Estructura de Datos  
 **Tema:** Árboles Binarios de Búsqueda  
 **Lenguaje:** C++  
-**Autor:** [Tu nombre aquí]
+**Autor:** [Luis Manobanda]
 
 ---
 
