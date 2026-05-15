@@ -148,3 +148,84 @@ private:
         return nodo;
     }
 
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: inordenRec
+    //  Recorrido Inorden: Izquierdo → Raíz → Derecho
+    //  Produce los nodos ordenados por cédula (ascendente).
+    // --------------------------------------------------------
+    void inordenRec(Nodo* nodo) {
+        if (nodo == nullptr) return;
+        inordenRec(nodo->izquierdo);
+        mostrarEstudiante(nodo->datos);
+        inordenRec(nodo->derecho);
+    }
+
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: preordenRec
+    //  Recorrido Preorden: Raíz → Izquierdo → Derecho
+    // --------------------------------------------------------
+    void preordenRec(Nodo* nodo) {
+        if (nodo == nullptr) return;
+        mostrarEstudiante(nodo->datos);
+        preordenRec(nodo->izquierdo);
+        preordenRec(nodo->derecho);
+    }
+
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: postordenRec
+    //  Recorrido Postorden: Izquierdo → Derecho → Raíz
+    // --------------------------------------------------------
+    void postordenRec(Nodo* nodo) {
+        if (nodo == nullptr) return;
+        postordenRec(nodo->izquierdo);
+        postordenRec(nodo->derecho);
+        mostrarEstudiante(nodo->datos);
+    }
+
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: contarRec
+    //  Cuenta recursivamente todos los nodos del árbol.
+    // --------------------------------------------------------
+    int contarRec(Nodo* nodo) {
+        if (nodo == nullptr) return 0;
+        return 1 + contarRec(nodo->izquierdo) + contarRec(nodo->derecho);
+    }
+
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: alturaRec
+    //  Calcula la altura del árbol recursivamente.
+    //  Altura = número de niveles - 1.
+    // --------------------------------------------------------
+    int alturaRec(Nodo* nodo) {
+        if (nodo == nullptr) return -1;
+        int altIzq = alturaRec(nodo->izquierdo);
+        int altDer = alturaRec(nodo->derecho);
+        return 1 + max(altIzq, altDer);
+    }
+
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: buscarMaxNotaRec
+    //  Recorre todo el árbol y devuelve el nodo con nota mayor.
+    // --------------------------------------------------------
+    Nodo* buscarMaxNotaRec(Nodo* nodo, Nodo* maxActual) {
+        if (nodo == nullptr) return maxActual;
+        if (maxActual == nullptr || nodo->datos.notaFinal > maxActual->datos.notaFinal)
+            maxActual = nodo;
+        maxActual = buscarMaxNotaRec(nodo->izquierdo, maxActual);
+        maxActual = buscarMaxNotaRec(nodo->derecho,   maxActual);
+        return maxActual;
+    }
+
+    // --------------------------------------------------------
+    //  FUNCIÓN PRIVADA: buscarMinNotaRec
+    //  Recorre todo el árbol y devuelve el nodo con nota menor.
+    // --------------------------------------------------------
+    Nodo* buscarMinNotaRec(Nodo* nodo, Nodo* minActual) {
+        if (nodo == nullptr) return minActual;
+        if (minActual == nullptr || nodo->datos.notaFinal < minActual->datos.notaFinal)
+            minActual = nodo;
+        minActual = buscarMinNotaRec(nodo->izquierdo, minActual);
+        minActual = buscarMinNotaRec(nodo->derecho,   minActual);
+        return minActual;
+    }
+
