@@ -4,7 +4,7 @@
  *  Facultad de Ingenieria en Sistemas, Electronica e Industrial
  *  Asignatura : Estructura de Datos
  *  Tema       : Arboles Binarios de Busqueda (BST)
- *  Autor      : [Tu nombre aqui]
+ *  Autor      : Luis Manobanda 
  *  Fecha      : 2025
  * ============================================================
  *
